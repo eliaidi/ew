@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sthy.dao.IContactDao">
+
+	<select id="queryContactById" parameterType="Map" resultType="com.sthy.pojo.Contact">
+		SELECT * FROM t_contact_info
+	</select>
+	
+	<insert id="insertMessage" parameterType="com.sthy.pojo.Message">
+		INSERT INTO t_message_info
+		(id,name,email,subject,message,ip,create_time)
+		VALUES
+		(#{id},#{name},#{email},#{subject},#{message},#{ip},#{create_time})
+	</insert>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- <typeAliases> -->
+	<!-- <typeAlias alias="Employee" type="com.vanceinfo.ems.login.domain.Employee" 
+		/> -->
+	<!-- </typeAliases> -->
+<!---->
+	<mappers>
+		<mapper resource="config/mapping/ProductDao.xml" />
+		<mapper resource="config/mapping/AboutUsDao.xml" />
+		<mapper resource="config/mapping/ServicesDao.xml" />
+		<mapper resource="config/mapping/ContactDao.xml" />
+		<mapper resource="config/mapping/ManageDao.xml" />
+	</mappers>
+</configuration>

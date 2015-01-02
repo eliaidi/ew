@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sthy.dao.IManageDao">
+
+	<select id="queryUser" parameterType="Map" resultType="com.sthy.pojo.User">
+		SELECT * FROM t_user_info WHERE 1=1 AND username = #{username}
+	</select>
+	
+	<select id="queryRole" parameterType="Map" resultType="com.sthy.pojo.Role">
+		SELECT * FROM t_role_info WHERE 1=1 AND id = #{id}
+	</select>
+	
+	<select id="queryRoleList" parameterType="Map" resultType="com.sthy.pojo.Role">
+		SELECT * FROM t_role_info WHERE 1=1 
+	</select>
+
+	<select id="queryMenuList" parameterType="Map" resultType="com.sthy.pojo.Menu">
+		SELECT 
+			t1.* 
+		FROM 
+			t_menu_info t1 
+		<if test="role_id != null and role_id != ''">
+		left join 
+			t_menu_role_rec t2 on t1.id=t2.menu_id 
+		WHERE 1=1 
+			AND t2.role_id = #{role_id}
+		</if>
+		ORDER BY orderNum asc
+	</select>
+	
+	<select id="queryMenuPageList" parameterType="Map" resultType="com.sthy.pojo.Menu">
+		SELECT * FROM t_menu_info
+		<include refid="menuPageWhere"/>
+		<include refid="limit"/>
+	</select>
+	<select id="queryMenuPageTotal" parameterType="Map" resultType="int">
+		SELECT count(1) FROM t_menu_info
+		<include refid="menuPageWhere"/> 
+	</select>
+	
+	<sql id="menuPageWhere">
+		WHERE 1=1 
+		<if test=" name != null and name != '' ">
+			AND name like CONCAT('%',#{name},'%')
+		</if>
+	</sql>
+	
+	<select id="queryRolePageList" parameterType="Map" resultType="com.sthy.pojo.Role">
+		SELECT * FROM t_role_info
+		<include refid="rolePageWhere"/>
+		<include refid="limit"/>
+	</select>
+	<select id="queryRolePageTotal" parameterType="Map" resultType="int">
+		SELECT count(1) FROM t_role_info
+		<include refid="rolePageWhere"/> 
+	</select>
+	
+	<sql id="rolePageWhere">
+		WHERE 1=1 
+		<if test=" name != null and name != '' ">
+			AND name like CONCAT('%',#{name},'%')
+		</if>
+	</sql>
+	
+	<select id="queryUserPageList" parameterType="Map" resultType="com.sthy.pojo.User">
+		SELECT t1.*,t2.name as role_name FROM t_user_info t1 left join t_role_info t2 on t1.role_id = t2.id
+		<include refid="userPageWhere"/>
+		<include refid="limit"/>
+	</select>
+	<select id="queryUserPageTotal" parameterType="Map" resultType="int">
+		SELECT count(1) FROM t_user_info t1 left join t_role_info t2 on t1.role_id = t2.id
+		<include refid="userPageWhere"/> 
+	</select>
+	
+	<sql id="userPageWhere">
+		WHERE 1=1 
+		<if test=" name != null and name != '' ">
+			AND name like CONCAT('%',#{name},'%')
+		</if>
+	</sql>
+	
+	<select id="queryServicePageList" parameterType="Map" resultType="com.sthy.pojo.Services">
+		SELECT * FROM t_services_info 
+		<include refid="servicePageWhere"/>
+		<include refid="limit"/>
+	</select>
+	<select id="queryServicePageTotal" parameterType="Map" resultType="int">
+		SELECT count(1) FROM t_services_info
+		<include refid="servicePageWhere"/> 
+	</select>
+	
+	<sql id="servicePageWhere">
+		WHERE 1=1 
+		<if test=" title != null and title != '' ">
+			AND title like CONCAT('%',#{title},'%')
+		</if>
+	</sql>
+	
+	<select id="queryEmployeePageList" parameterType="Map" resultType="com.sthy.pojo.Employee">
+		SELECT * FROM t_employee_info 
+		<include refid="employeePageWhere"/>
+		<include refid="limit"/>
+	</select>
+	<select id="queryEmployeePageTotal" parameterType="Map" resultType="int">
+		SELECT count(1) FROM t_employee_info
+		<include refid="employeePageWhere"/> 
+	</select>
+	
+	<sql id="employeePageWhere">
+		WHERE 1=1 
+		<if test=" name != null and name != '' ">
+			AND name like CONCAT('%',#{name},'%')
+		</if>
+	</sql>
+	
+	<select id="queryMessagePageList" parameterType="Map" resultType="com.sthy.pojo.Message">
+		SELECT * FROM t_message_info 
+		<include refid="messagePageWhere"/>
+		<include refid="limit"/>
+	</select>
+	<select id="queryMessagePageTotal" parameterType="Map" resultType="int">
+		SELECT count(1) FROM t_message_info
+		<include refid="employeePageWhere"/> 
+	</select>
+	
+	<sql id="messagePageWhere">
+		WHERE 1=1 
+		<if test=" name != null and name != '' ">
+			AND name like CONCAT('%',#{name},'%')
+		</if>
+		<if test=" isFlag != null and isFlag != '' ">
+			AND is_flag = #{isFlag}
+		</if>
+	</sql>
+	
+	<sql id="limit">
+		limit #{startPage},#{endPage}
+	</sql>
+	
+	<select id="queryEmployee" parameterType="Map" resultType="com.sthy.pojo.Employee">
+		SELECT * FROM t_employee_info WHERE 1=1 AND id = #{id}
+	</select>
+	
+	<insert id="insertMenu" parameterType="com.sthy.pojo.Menu">
+		INSERT INTO t_menu_info 
+			(name,path,orderNum)
+		VALUES
+			(#{name},#{path},#{orderNum})
+	</insert>
+	
+	<update id="updateMenu" parameterType="com.sthy.pojo.Menu">
+		UPDATE T_MENU_INFO SET name = #{name}, path = #{path}, orderNum = #{orderNum} WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteMenu" parameterType="com.sthy.pojo.Menu">
+		DELETE FROM T_MENU_INFO	WHERE id = #{id}
+	</delete>
+	
+	<insert id="insertRole" parameterType="com.sthy.pojo.Role">
+		<selectKey keyProperty="id" order="AFTER" resultType="String">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		INSERT INTO T_ROLE_INFO
+			(name)
+		VALUES
+			(#{name})
+	</insert>
+	
+	<update id="updateRole" parameterType="com.sthy.pojo.Role">
+		UPDATE T_ROLE_INFO SET name = #{name} WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteRole" parameterType="com.sthy.pojo.Role">
+		DELETE FROM T_ROLE_INFO	WHERE id = #{id}
+	</delete>
+	
+	<insert id="insertRoleMenu" parameterType="Map">
+		INSERT INTO t_menu_role_rec (menu_id,role_id) VALUES (#{menu_id}, #{role_id})
+	</insert>
+	
+	<delete id="deleteRoleMenu" parameterType="Map">
+		DELETE FROM t_menu_role_rec WHERE role_id = #{role_id}
+	</delete>
+	
+	<insert id="insertUser" parameterType="com.sthy.pojo.User">
+		<selectKey keyProperty="id" order="AFTER" resultType="String">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		INSERT INTO t_user_info
+			(username,password,name,is_flag,role_id)
+		VALUES
+			(#{username},#{password},#{name},#{is_flag},#{role_id})
+	</insert>
+	
+	<update id="updateUser" parameterType="com.sthy.pojo.User">
+		UPDATE t_user_info SET name = #{name} ,is_flag = #{is_flag}, role_id = #{role_id} WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteUser" parameterType="com.sthy.pojo.User">
+		DELETE FROM t_user_info	WHERE id = #{id}
+	</delete>
+	
+	<insert id="insertService" parameterType="com.sthy.pojo.Services">
+		INSERT INTO t_services_info
+			(id,title,sub_title,price,price_model,description,is_flag)
+		VALUES
+			(#{id},#{title},#{sub_title},#{price},#{price_model},#{description},#{is_flag})
+	</insert>
+	
+	<update id="updateService" parameterType="com.sthy.pojo.Services">
+		UPDATE t_services_info SET title = #{title} ,sub_title = #{sub_title}, price = #{price},  price_model = #{price_model} ,  description = #{description},  is_flag = #{is_flag} WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteService" parameterType="com.sthy.pojo.Services">
+		DELETE FROM t_services_info	WHERE id = #{id}
+	</delete>
+	
+	<insert id="insertEmployee" parameterType="com.sthy.pojo.Employee">
+		<selectKey keyProperty="id" order="AFTER" resultType="String">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		INSERT INTO t_employee_info
+			(id, name, job_description, description, start_img_path, end_img_path)
+		VALUES
+			(
+				#{id},
+				#{name},
+				#{job_description},
+				#{description},
+				#{start_img_path},
+				#{end_img_path}
+			)
+	</insert>
+	
+	<update id="updateEmployee" parameterType="com.sthy.pojo.Employee">
+		UPDATE 
+			t_employee_info 
+		SET 
+			name = #{name},
+			job_description = #{job_description},
+			description = #{description},
+			start_img_path = #{start_img_path},
+			end_img_path = #{end_img_path}
+		WHERE 1=1 AND id = #{id}
+	</update>
+	
+	<delete id="deleteEmployee" parameterType="com.sthy.pojo.Employee">
+		DELETE FROM t_employee_info WHERE id = #{id}
+	</delete>
+	
+</mapper>

@@ -1,0 +1,137 @@
+* {
+	font-family: Verdana,微软雅黑;
+	font-size: 14px;
+	padding: 0px;
+	margin: 0px;
+}
+a {
+	text-decoration:none;
+}
+.body_bg {
+	font-family: Arial, Helvetica, sans-serif;
+	background: url(../images/grass.jpg);
+	font-size: 13px;
+}
+
+img {
+	border: 0;
+}
+
+.lg {
+	width: 468px;
+	height: 468px;
+	margin: 100px auto;
+	background: url(../images/login_bg.png) no-repeat;
+}
+
+.lg_top {
+	height: 200px;
+	width: 468px;
+}
+
+.lg_main {
+	width: 400px;
+	height: 180px;
+	margin: 0 25px;
+}
+
+.lg_m_1 {
+	width: 290px;
+	height: 100px;
+	padding: 60px 55px 20px 55px;
+}
+
+.ur {
+	height: 37px;
+	border: 0;
+	color: #666;
+	width: 236px;
+	margin: 4px 28px;
+	background: url(../images/user.png) no-repeat;
+	padding-left: 10px;
+	font-size: 16pt;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.pw {
+	height: 37px;
+	border: 0;
+	color: #666;
+	width: 236px;
+	margin: 4px 28px;
+	background: url(../images/password.png) no-repeat;
+	padding-left: 10px;
+	font-size: 16pt;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.bn {
+	width: 330px;
+	height: 72px;
+	background: url(../images/enter.png) no-repeat;
+	border: 0;
+	display: block;
+	font-size: 18px;
+	color: #FFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bolder;
+}
+
+.lg_foot {
+	height: 80px;
+	width: 330px;
+	padding: 6px 68px 0 68px;
+}
+
+.leftMenu {
+	width: 100%;
+}
+
+.leftMenu li {
+	width: 100%;
+	height:50px;
+	background: url(../images/left_default.png) repeat;
+}
+
+.leftMenu li:hover {
+	background: url(../images/left_hover.png) repeat;
+}
+
+.leftMenu .active {
+	background: url(../images/left_hover.png) repeat;
+}
+
+.leftMenu li a {
+	display:block;
+	line-height: 50px;
+	color: white;
+	font-size: 17px;
+	text-align: center;
+	white-space:nowrap;
+}
+
+.default_background {
+	background: url(../../images/backgrounds/wild_oliva_light.png);
+}
+.logo {
+	float:left;
+	width:auto;
+	height:40px;
+	vertical-align:middle;
+	padding: 2px;
+	line-height: 40px;
+}
+.logo a img {
+	vertical-align:middle;
+	width: 40px;
+	height: 40px;
+}
+.logo2 {
+	float:right;
+	width:auto;
+	height:auto;
+	padding: 2px;
+	vertical-align:middle;
+}
+
+.footer{text-align:center;color:#15428B; margin:0px; padding:0px;line-height:23px; font-weight:bold;}
